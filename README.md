@@ -13,6 +13,6 @@
  - src/services/result.json chứa dữ liệu trả về mẫu có thể dùng đường dẫn /getRobin trên trang web đê xem 
  - src/public/js/index.js chứa code xử lý để gủi dữ liệu đầu vào và nhận json trả về để in ra màn hình
 
- - [link demo](https://cpuschedule.herokuapp.com)
+ - [link demo](https://dinhthoi.herokuapp.com)
 
 ## Created by Tuấn Anh
