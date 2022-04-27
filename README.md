@@ -15,15 +15,6 @@
 
  - [link demo](https://dinhthoi.herokuapp.com)
 
-Ví dụ bài toán định thời cpu sau với giải thuật RR q = 4
-Tiến trình     Thời điểm vào     Thời gian xử lý
-       P1                      0                            24
-       P2                      1                              3
-       P3                      2                              3
+![image](https://user-images.githubusercontent.com/81815569/165440525-92de1f84-dc67-4d9a-a881-dec976de8609.png)
 
-Thì input data sẽ như sau:
-3 4
-1 0 24
-2 1 3
-3 2 3
-
+Thêm khoảng trắng hoặc xuống dòng ở cuối input để chạy được
