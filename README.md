@@ -14,6 +14,16 @@
  - src/public/js/index.js chứa code xử lý để gủi dữ liệu đầu vào và nhận json trả về để in ra màn hình
 
  - [link demo](https://dinhthoi.herokuapp.com)
-![image](https://user-images.githubusercontent.com/81815569/165440195-ac5f1300-c7a4-40af-b08b-26791ed886b2.png)
 
-## Created by Tuấn Anh
+Ví dụ bài toán định thời cpu sau với giải thuật RR q = 4
+Tiến trình     Thời điểm vào     Thời gian xử lý
+       P1                      0                            24
+       P2                      1                              3
+       P3                      2                              3
+
+Thì input data sẽ như sau:
+3 4
+1 0 24
+2 1 3
+3 2 3
+
