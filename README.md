@@ -14,5 +14,6 @@
  - src/public/js/index.js chứa code xử lý để gủi dữ liệu đầu vào và nhận json trả về để in ra màn hình
 
  - [link demo](https://dinhthoi.herokuapp.com)
+![image](https://user-images.githubusercontent.com/81815569/165440195-ac5f1300-c7a4-40af-b08b-26791ed886b2.png)
 
 ## Created by Tuấn Anh
