@@ -9,7 +9,7 @@ let getRobin_1 = async (req, res) => {
 }
 
 let getRobin = async (req, res) => {
-    var pattern = /^([0-9]+\s)*$/;
+    var pattern = /^([0-9]+\s)*[0-9]+|([0-9]+\s)$/;
     var input = req.body.data.input;
     if (pattern.test(input) == false) {
         res.send([]);
