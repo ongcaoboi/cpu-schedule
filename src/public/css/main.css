@@ -22,6 +22,10 @@ body {
     border-left: none;
     border-right: none;
 }
+.item-wait {
+    background-color: #ccc !important;
+    color: #000 !important;
+}
 .item > .liner {
     position: absolute;
     bottom: -25px;
