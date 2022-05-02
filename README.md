@@ -17,4 +17,3 @@
 
 ![image](https://user-images.githubusercontent.com/81815569/165440525-92de1f84-dc67-4d9a-a881-dec976de8609.png)
 
-Thêm khoảng trắng hoặc xuống dòng ở cuối input để chạy được
