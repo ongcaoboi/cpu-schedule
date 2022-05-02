@@ -49,17 +49,25 @@ let getFCFS = (input) => {
         var arr_process = [];
         lines.forEach(element => {
             element = element.split(' ');
-            if(typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined' ){
+            if (typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined') {
                 return '';
             }
             arr.push(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
             arr_process.push(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
         });
         const result = [];
-        var time = arr[0].at;
+        var time = 0;
         var time_start = time;
         while (arr.length != 0) {
             var item = arr[0];
+            if (item.at > time) {
+                result.push({
+                    time_start: time,
+                    process: new Process('wait', -1, -1)
+                });
+                time++;
+                continue;
+            }
             while (true) {
                 result.push({
                     time_start: time,
@@ -107,6 +115,7 @@ let getFCFS = (input) => {
         return data;
     }
     catch (err) {
+        console.log(err);
         return '';
     }
 }
@@ -120,7 +129,7 @@ let getSJF = (input) => {
         var arr_process = [];
         lines.forEach(element => {
             element = element.split(' ');
-            if(typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined' ){
+            if (typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined') {
                 return '';
             }
             arr.push(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
@@ -134,10 +143,18 @@ let getSJF = (input) => {
         });
         arr.unshift(item_tmp);
         const result = [];
-        var time = arr[0].at;
+        var time = 0;
         var time_start = time;
         while (arr.length != 0) {
             var item = arr[0];
+            if (item.at > time) {
+                result.push({
+                    time_start: time,
+                    process: new Process('wait', -1, -1)
+                });
+                time++;
+                continue;
+            }
             while (true) {
                 result.push({
                     time_start: time,
@@ -185,6 +202,7 @@ let getSJF = (input) => {
         return data;
     }
     catch (err) {
+        console.log(err);
         return '';
     }
 }
@@ -197,18 +215,37 @@ let getSRTF = (input) => {
         var arr_process = [];
         lines.forEach(element => {
             element = element.split(' ');
-            if(typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined' ){
+            if (typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined') {
                 return '';
             }
             arr.enqueue(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
             arr_process.push(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
         });
         var arr_run = [];
-        arr_run.push(arr.dequeue());
         const result = [];
-        var time = arr_run[0].at;
+        var time = 0;
         var time_start = time;
-        while (arr_run.length != 0) {
+        while (arr.isEmpty() == false | arr_run.length != 0 ) {
+            if (arr.isEmpty() == false) {
+                var item_next = arr.peek();
+                if (item_next.at == time) {
+                    arr_run.push(arr.dequeue());
+                }
+            }
+            if (arr_run.length == 0) {
+                result.push({
+                    time_start: time,
+                    process: new Process('wait', -1, -1)
+                });
+                time++;
+                if (arr.isEmpty() == false) {
+                    var item_next = arr.peek();
+                    if (item_next.at == time) {
+                        arr_run.push(arr.dequeue());
+                    }
+                }
+                continue;
+            }
             var item = arr_run.shift();
             while (true) {
                 result.push({
@@ -280,6 +317,7 @@ let getSRTF = (input) => {
         return data;
     }
     catch (err) {
+        console.log(err);
         return '';
     }
 }
@@ -293,7 +331,7 @@ let roundRobin = (input) => {
         var arr = new Queue();
         lines.forEach(element => {
             element = element.split(' ');
-            if(typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined' ){
+            if (typeof element[0] === 'undefined' | typeof element[1] === 'undefined' | typeof element[2] === 'undefined') {
                 return '';
             }
             arr.enqueue(new Process(Number(element[0]), Number(element[1]), Number(element[2])));
@@ -301,10 +339,29 @@ let roundRobin = (input) => {
         });
         var queue = new Queue();
         const result = [];
-        queue.enqueue(arr.dequeue());
-        var time = queue.peek().at;
+        var time = 0;
         var time_start = time;
-        while (queue.isEmpty() == false) {
+        while (arr.isEmpty() == false || queue.isEmpty() == false) {
+            if (arr.isEmpty() == false) {
+                var item_next = arr.peek();
+                if (item_next.at == time) {
+                    queue.enqueue(arr.dequeue());
+                }
+            }
+            if (queue.isEmpty() == true) {
+                result.push({
+                    time_start: time,
+                    process: new Process('wait', -1, -1)
+                });
+                time++;
+                if (arr.isEmpty() == false) {
+                    var item_next = arr.peek();
+                    if (item_next.at == time) {
+                        queue.enqueue(arr.dequeue());
+                    }
+                }
+                continue;
+            }
             var item = queue.dequeue();
             for (var i = 0; i < tq; i++) {
                 result.push({
@@ -362,6 +419,7 @@ let roundRobin = (input) => {
         return data;
     }
     catch (err) {
+        console.log(err);
         return '';
     }
 };
